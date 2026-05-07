@@ -27,7 +27,7 @@ const CONFIG = {
   MONTH_CALC_STRING_CURRENT: "AKTUELLER",
   MONTH_CALC_STRING_LAST: "LETZTER",
 
-  // ##__SPREADSHEET__##: "Master_WinterDienst" ------------------------------------ [START]
+  // ##__SPREADSHEET__##: "Master_FerienwohnungDienst" ------------------------------------ [START]
   // Sheet: "Master"
   SN_Master: "Master",
   SN_FormularResponses: "Formularantworten 3",

@@ -197,17 +197,21 @@ function newFormularValues(_values) {
       if (dateTimeObject && !isNaN(dateTimeObject.getTime())) {
         // CASE: DateTime-Objekt ist gültig.
         // =====        
-        // Spalte C: Jahr.
+        // Spalte C: Jahr + Spalte D: Monat (zusammen berechnen wegen Jahreswechsel).
         var timeStampYear = dateTimeObject.getFullYear();
-        sheet.getRange(row, colStart + 2).setValue(timeStampYear);
-
-        // Spalte D: Monat.
         var timeStampMonth;
         if (_values[3] == CONFIG.MONTH_CALC_STRING_CURRENT) {
           timeStampMonth = dateTimeObject.getMonth() + 1;
         } else {
-          timeStampMonth = dateTimeObject.getMonth();
+          // LETZTER: Januar-Einreichung → Dezember des Vorjahres.
+          if (dateTimeObject.getMonth() === 0) {
+            timeStampMonth = 12;
+            timeStampYear = dateTimeObject.getFullYear() - 1;
+          } else {
+            timeStampMonth = dateTimeObject.getMonth();
+          }
         }
+        sheet.getRange(row, colStart + 2).setValue(timeStampYear);
         sheet.getRange(row, colStart + 3).setValue(timeStampMonth);
 
         // Spalte E: Tag - Wert errechnet anhand es aktuellen Datums.
